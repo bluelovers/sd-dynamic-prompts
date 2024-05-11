@@ -161,7 +161,7 @@ def show_menu(repositories: list[dict[str, str]]) -> tuple[str, str, str]:
 
 
 def download_and_copy(url: str, root_directory, destination_path: Path):
-    if url.endswith((".json", ".yaml")):
+    if url.endswith((".json", ".yaml", ".yml")):
         filename = url.split("/")[-1]
         download_pantry(url, destination_path, filename)
     elif url.endswith(".zip"):
