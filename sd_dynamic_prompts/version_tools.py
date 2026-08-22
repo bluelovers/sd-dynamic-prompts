@@ -92,6 +92,19 @@ def get_install_result(req_str: str) -> InstallResult:
     return res
 
 
+# Requirements that should never be auto-installed by this extension.
+# The bluelovers/dynamicprompts fork is installed manually by the user,
+# so we must not trigger pip (and the resulting startup log spam) for it.
+AUTO_INSTALL_EXCLUDED = frozenset({"dynamicprompts"})
+
+
+def _is_excluded(req_str: str) -> bool:
+    try:
+        return Requirement(req_str).name in AUTO_INSTALL_EXCLUDED
+    except Exception:
+        return False
+
+
 def get_requirements_install_results() -> Iterable[InstallResult]:
     """
     Get InstallResult objects for all requirements.
@@ -127,7 +140,7 @@ def install_requirements(force=False) -> None:
     requirements_to_install = [
         str(ires.requirement)
         for ires in get_requirements_install_results()
-        if (force or ires.requirement.url or not ires.correct)
+        if (force or not ires.correct) and not _is_excluded(str(ires.requirement))
     ]
 
     if not requirements_to_install:
