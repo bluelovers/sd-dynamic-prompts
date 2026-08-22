@@ -574,9 +574,11 @@ class Script(scripts.Script):
                 params[key] = _files
                 print(_files)
                 dump_cache()
-        except e:
-            print(e)
-            pass
+        except AttributeError as e:
+            print(f"[Dynamic Prompts] WildcardManager 缺少 used_collection_dict() 方法，"
+                  f"請確認是否使用自訂版本的 WildcardManager：{e}")
+        except Exception as e:
+            print(f"[Dynamic Prompts] params_used_collection 發生錯誤：{e}")
 
     def process_batch(self, p, *args, **kwargs):
         batch_number = kwargs.get('batch_number')
