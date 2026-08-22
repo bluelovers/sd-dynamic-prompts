@@ -127,7 +127,7 @@ def install_requirements(force=False) -> None:
     requirements_to_install = [
         str(ires.requirement)
         for ires in get_requirements_install_results()
-        if (force or not ires.correct)
+        if (force or ires.requirement.url or not ires.correct)
     ]
 
     if not requirements_to_install:
