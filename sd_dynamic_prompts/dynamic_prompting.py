@@ -575,10 +575,11 @@ class Script(scripts.Script):
                 print(_files)
                 dump_cache()
         except AttributeError as e:
-            print(f"[Dynamic Prompts] WildcardManager 缺少 used_collection_dict() 方法，"
-                  f"請確認是否使用自訂版本的 WildcardManager：{e}")
+            print(f"[Dynamic Prompts] WildcardManager is missing the used_collection_dict() method. "
+                  f"Please install the bluelovers dynamicprompts fork: "
+                  f"pip install \"git+https://github.com/bluelovers/dynamicprompts.git@dev-202509\" ")
         except Exception as e:
-            print(f"[Dynamic Prompts] params_used_collection 發生錯誤：{e}")
+            print(f"[Dynamic Prompts] Error in params_used_collection: {e}")
 
     def process_batch(self, p, *args, **kwargs):
         batch_number = kwargs.get('batch_number')
