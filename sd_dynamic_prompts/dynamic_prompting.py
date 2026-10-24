@@ -577,7 +577,7 @@ class Script(scripts.Script):
         except AttributeError as e:
             print(f"[Dynamic Prompts] WildcardManager is missing the used_collection_dict() method. "
                   f"Please install the bluelovers dynamicprompts fork: "
-                  f"pip install \"git+https://github.com/bluelovers/dynamicprompts.git@dev-202509\" ")
+                  f"uv pip install \"git+https://github.com/bluelovers/dynamicprompts.git@dev-neo-202608\" ")
         except Exception as e:
             print(f"[Dynamic Prompts] Error in params_used_collection: {e}")
 
